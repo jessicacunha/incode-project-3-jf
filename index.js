@@ -1,18 +1,26 @@
 var express = require('express');
 var app = express();
-var users = module.exports.users;
-var schedules = module.exports.schedules;
+var data = require('./data');
 
 app.get('/', (req, res) => {
   res.send('Welcome to our schedule website');
 });
 
 app.get('/users', (req, res) => {
-  res.send(users);
+  res.send(data.users);
 });
 
+// app.get('/users/id', (req, res) => {
+//   var id = data.users.user_id
+
+
+
+//   res.send(data.users);
+// });
+
 app.get('/schedules', (req, res) => {
-  res.send(schedules);
+  res.send(data.schedules);
 });
+
 
 app.listen(3000, function () { });

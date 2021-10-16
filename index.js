@@ -18,5 +18,7 @@ app.get('/schedules', (req, res) => {
     res.send(schedules)
 })
 
-app.listen(port, () => {})
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`);
+})
 

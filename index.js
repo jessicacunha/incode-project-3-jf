@@ -1,7 +1,6 @@
 const express = require('express');
 
-const users = require('./data');
-const schedules = require('./schedules');
+const data = require('./data');
 
 const app = express();
 const port = 3000;
@@ -11,9 +10,9 @@ app.get('/', (req, res) => {
 })
 
 //a 'for' to create a route for each user
-for (var user in users) {
+for (var user in data.users) {
     app.get(`/users/${user}`, (req, res) => {
-        res.send(users[user])
+        res.send(data.users[user])
     })
 }
 

@@ -1,63 +1,26 @@
-const express = require('express')
-const app = express()
-// testing
-const users = [
-    {
-        'firstname': "James",
-        'lastname': "Bond",
-        'email': "james.bond@gmail.com",
-        'password': "b6b7fb4cad4bc020f76e16889a8e9065cb708d0f8c304a8a3db609b644da9536"  
-    },
-    {
-        'firstname': "Tony",
-        'lastname': "Stark",
-        'email': "starkrulz@gmail.com",
-        'password': "a836ebba36776b21dd0f5cdca497bff65c5bdfc8411cfbfe0111f27bde1c1894"  
-    },
-    {
-        'firstname': "Ali",
-        'lastname': "G",
-        'email': "nameisnotborat@gmail.com",
-        'password': "3b5fe14857124335bb8832cc602f8edcfa12db42be36b135bef5bca47e3f2b9c"  
-    }
-]
-
-const schedules = [
-    {
-        'user_id': 0,
-        'day': 1,
-        'start_at': "2PM",
-        'end_at': "4PM"
-    },
-    {
-        'user_id': 0,
-        'day': 2,
-        'start_at': "2PM",
-        'end_at': "4PM"
-    },
-    {
-        'user_id': 0,
-        'day': 3,
-        'start_at': "2PM",
-        'end_at': "4PM"
-    },
-    {
-        'user_id': 2,
-        'day': 5,
-        'start_at': "8AM",
-        'end_at': "6PM"
-    }
-]
+var express = require('express');
+var app = express();
+var data = require('./data');
 
 app.get('/', (req, res) => {
-    res.send("Welcome to our schedule website")
-})
+  res.send('Welcome to our schedule website');
+});
 
 app.get('/users', (req, res) => {
-    res.send(users)
-})
-app.get('/schedules', (req, res) => {
-    res.send(schedules)
-})
+  res.send(data.users);
+});
 
-app.listen(3000)
+// app.get('/users/id', (req, res) => {
+//   var id = data.users.user_id
+
+
+
+//   res.send(data.users);
+// });
+
+app.get('/schedules', (req, res) => {
+  res.send(data.schedules);
+});
+
+
+app.listen(3000, function () { });

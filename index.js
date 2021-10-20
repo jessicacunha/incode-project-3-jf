@@ -14,6 +14,10 @@ for (let user in data.users) {
     })
 }
 
+app.post('/users', (req, res) => {
+    res.send(data.users)
+})
+
 app.get('/schedules', (req, res) => {
     res.send(data.schedules);
 });
@@ -23,23 +27,10 @@ app.listen(3000, () => {
 })
 
 //route for the schedule fo each user
-/*for (var schedule in data.schedules) {
+allSchedules = []
 data.schedules.filter(obj => {
     console.log(obj)
-    
     app.get(`/users/${obj.user_id}/schedules`, (req, res) => {
         res.send(obj)
     })
 })
-}
-
-var result = data.schedules.filter(obj => {
-    if (obj.user_id === 0) {
-        console.log(obj)
-    }
-    return obj.user_id === 0
-})*/
-
-
-
-

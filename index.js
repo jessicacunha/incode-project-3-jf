@@ -1,36 +1,39 @@
-const express = require('express');
-const app = express();
-const data = require('./data');
-
+var express = require('express');
+var app = express();
+const { schedules } = require('../../../AppData/Local/Temp/Temp1_data.zip/data');
+var data = require('./data');
 
 app.get('/', (req, res) => {
-    res.send('Welcome to our schedule website')
-})
-
-//a 'for' to create a route for each user
-for (let user in data.users) {
-    app.get(`/users/${user}`, (req, res) => {
-        res.send(data.users[user])
-    })
-}
-
-app.post('/users', (req, res) => {
-    res.send(data.users)
-})
-
-app.get('/schedules', (req, res) => {
-    res.send(data.schedules);
+  res.send('Welcome to our schedule website');
 });
 
-app.listen(3000, () => {
-    console.log(`Server running at http://localhost:${3000}/`);
-})
+app.get('/users', (req, res) => {
+  res.send(data.users);
+});
 
-//route for the schedule fo each user
-allSchedules = []
-data.schedules.filter(obj => {
-    console.log(obj)
-    app.get(`/users/${obj.user_id}/schedules`, (req, res) => {
-        res.send(obj)
-    })
-})
+// app.get('/users/id', (req, res) => {
+//   var id = data.users.user_id
+
+
+
+//   res.send(data.users);
+// });
+
+app.get('/schedules', (req, res) => {
+  res.send(data.schedules);
+});
+// used req.params for route
+app.get('/users/:id', (req, res) => {
+    let id = req.params.id; 
+    console.log(id);
+    if(data.users[id]) {res.json(data.users[id])}
+    else {
+        res.json('Unknown')
+    }
+  })
+
+
+app.listen(3000, function () { });
+
+//test push to main
+testing = []

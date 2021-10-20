@@ -14,14 +14,14 @@ app.get('/schedules', (req, res) => {
   res.send(data.schedules);
 });
 
-for (var data in data.schedules) {
-data.schedules.filter(obj => {
-    console.log(obj)
-    
-    app.get(`/users/${obj.user_id}/schedules`, (req, res) => {
-        res.send(obj)
-    })
-})
-}
+app.get('/users/:id', (req, res) => {
+    let id = req.params.id; 
+    console.log(id);
+    if(data.users[id]) {res.json(data.users[id])}
+    else {
+        res.json('Unknown')
+    }
+  })
+
 
 app.listen(3000, function () { });

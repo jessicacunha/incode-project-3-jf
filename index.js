@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var data = require('./data');
 var bodyParser = require('body-parser');
-app.use(bodyParser.text());
+var crypto = require('crypto');
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.send('Welcome to our schedule website');
@@ -34,21 +35,22 @@ app.get(`/users/:userId/schedules`, (req, res) => {
 
 app.post('/schedules', (req, res) => {
     let scheduleObject = {
-        'user_id':req.body.user_id, 
-        'day':req.body.day, 
-        'start_at':req.body.start_at, 
-        'end_at':req.body.end_at
+        user_id: req.body.user_id, 
+        day: req.body.day, 
+        start_at: req.body.start_at, 
+        end_at: req.body.end_at
     }
     data.schedules.push(scheduleObject)
     res.send(scheduleObject)
 })
 
 app.post('/users', (req, res) => {
+    var hash = crypto.createHash('sha256').update(req.body.password).digest('base64')
     let newUser = {
         firstname: req.body.firstname, 
         lastname: req.body.lastname, 
         email: req.body.email, 
-        password: req.body.password
+        password: hash
     }
     data.users.push(newUser)
     res.send(newUser)

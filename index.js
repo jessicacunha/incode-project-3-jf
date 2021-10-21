@@ -2,7 +2,12 @@ var express = require("express");
 var app = express();
 var data = require("./data");
 var bodyParser = require('body-parser');
-app.use(bodyParser.text());
+app.use(bodyParser.json());
+app.set('view engine', 'pug')
+
+var crypto = require('crypto');
+
+
 
 app.get("/", (req, res) => {
   res.send("Welcome to our schedule website");
@@ -34,16 +39,22 @@ app.get("/users/:userId/schedules", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
+ 
+  var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
   var newUser = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
-    password: req.body.password
+    password: hash
   };
   data.users.push(newUser);
   res.send(newUser);
 
 });
+
+app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
 
 app.listen(3000, function () { });
 

@@ -3,7 +3,6 @@ var app = express();
 var data = require("./data");
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.set('view engine', 'pug')
 
 var crypto = require('crypto');
 
@@ -51,10 +50,6 @@ app.post("/users", (req, res) => {
   res.send(newUser);
 
 });
-
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!' })
-})
 
 app.listen(3000, function () { });
 
